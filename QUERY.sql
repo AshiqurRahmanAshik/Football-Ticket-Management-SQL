@@ -24,19 +24,19 @@ CREATE TABLE Users (
 );
 
 -- =========================================================================
--- 2. CREATE MATCHES TABLE
+-- 2. MATCHES TABLE
 -- =========================================================================
 CREATE TABLE Matches (
-    match_id TYPE,
-    fixture TYPE,
-    tournament_category TYPE,
-    base_ticket_price TYPE,
-    match_status TYPE,
+    match_id INT PRIMARY KEY,
+    fixture VARCHAR(100) NOT NULL,
+    tournament_category VARCHAR(50) NOT NULL,
+    base_ticket_price INT NOT NULL,
+    match_status VARCHAR(30) NOT NULL,
     
-    -- Write your constraint to make 'match_id' the Primary Key
-    -- Write your check constraint to prevent negative ticket prices
-    -- Write your check constraint to restrict 'match_status' values
+    CONSTRAINT check_price CHECK (base_ticket_price >= 0),
+    CONSTRAINT check_match_status CHECK (match_status IN ('Available', 'Selling Fast', 'Sold Out'))
 );
+
 
 -- =========================================================================
 -- 3. CREATE BOOKINGS TABLE
